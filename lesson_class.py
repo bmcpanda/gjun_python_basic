@@ -52,6 +52,17 @@ class Goose(Poultry):
         print(f"{self.species} eat bug, vegetable, and popcorn.")
 
 
+class Donaldduck(Poultry):
+    def __init__(self, color, sound) -> None:
+        super().__init__(color, sound, "Donaldduck")
+
+    def eat(self):
+        print(f"{self.species} eat bug.")
+
+    def makes_money(self):
+        print(f"{self.species} is rich.")
+
+
 if __name__ == '__main__':
     duck_1 = Duck('yellow', 'ba')
     duck_2 = Duck('black', 'ga')
