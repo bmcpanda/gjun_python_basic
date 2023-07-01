@@ -27,7 +27,7 @@ class Duck(Poultry):
         super().__init__(color, sound, "Duck")
 
     def eat(self):
-        print(f"{self.species} eat vegitable.")
+        print(f"{self.species} eat vegetable.")
     
     def swim(self):
         print(f"{self.species} swim ~")
@@ -42,6 +42,14 @@ class Chicken(Poultry):
 
     def morning_call(self, time):
         print(f"{self.sound * 3}, it's {time} a.m. now")
+
+
+class Goose(Poultry):
+    def __init__(self, color, sound) -> None:
+        super().__init__(color, sound, "Goose")
+
+    def eat(self):
+        print(f"{self.species} eat bug, vegetable, and popcorn.")
 
 
 if __name__ == '__main__':
