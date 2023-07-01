@@ -1,0 +1,6 @@
+print("オーイェー!!!\nit is baby!!!")
+print("* * * * *")
+print("* * * * *")
+print("* * * * *")
+print("* * * * *")
+print("* * * * *")
