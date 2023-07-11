@@ -24,8 +24,7 @@ while c > 1:
     remainder = c % 2
     c = c//2
     binary_string = str(remainder) + binary_string
-    print(f"c={c}, r = {remainder}, bs ={binary_string}" )
+    print(f"c={c}, r = {remainder}, bs ={binary_string}")
 
 binary_string = str(c) + binary_string
 print("binary string: ", binary_string)
-

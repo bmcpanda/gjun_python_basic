@@ -77,3 +77,6 @@ if __name__ == '__main__':
     print(chicken_1.sound)
     chicken_1.eat()
     chicken_1.morning_call(6)
+
+    donaldduck_1 = Donaldduck('white', 'wa')
+    donaldduck_1.makes_money()

@@ -1,11 +1,11 @@
 import numpy as np
 n = 6
-bubbles = np.random.randint(1, 10, n)
+bubbles = np.random.choice(100, n, replace=False)
 print(list(bubbles))
 
-#n=6
-#r1:idx5 r2:idx4 r3:idx3 r4:idx2 ==> r + idx = 6, idx = 6 - r
-#Time Complexity = O(n**2)
+# n=6
+# r1:idx5 r2:idx4 r3:idx3 r4:idx2 ==> r + idx = 6, idx = 6 - r
+# Time Complexity = O(n**2)
 
 for round, _ in enumerate(bubbles):
     for index, _ in enumerate(bubbles):
@@ -20,4 +20,4 @@ for round, _ in enumerate(bubbles):
 
 print(sorted(bubbles))
 
-#index - 1 edit index
+# index - 1 edit index
