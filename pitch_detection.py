@@ -17,7 +17,8 @@ def fundamental_frequency_pitch_track(file_path, file_name):
     fig.colorbar(img, ax=ax, format="%+2.f dB")
     ax.plot(times, f0, label='f0', color='cyan', linewidth=3)
     ax.legend(loc='upper right')
-    plt.show()
+    plt.savefig('./static/' + file_name + '.jpg')
+    # plt.show()
 
 
 if __name__ == '__main__':

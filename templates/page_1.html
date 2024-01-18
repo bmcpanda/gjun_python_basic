@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上傳聲音檔案</title>
+</head>
+
+<body>
+    <form id="audioForm" enctype="multipart/form-data">
+        <label for="audioFile">選擇聲音檔案：</label>
+        <input type="file" id="audioFile" name="audioFile" accept="audio/*">
+        <button type="button" onclick="uploadAudio()">上傳</button>
+    </form>
+
+    <div id="result"></div>
+    <div id="imgResult"></div>
+
+    <script>
+        function uploadAudio() {
+            var formData = new FormData();
+            var audioFile = document.getElementById('audioFile').files[0];
+
+            if (audioFile) {
+                formData.append('audioFile', audioFile);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === '檔案上傳成功') {
+                            document.getElementById('result').innerHTML = '檔案上傳成功！';
+
+                            //
+                            var jpg_name = audioFile.name + ".jpg"
+                            startPolling(jpg_name)
+                        } else {
+                            document.getElementById('result').innerHTML = '檔案上傳失敗。';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('錯誤:', error);
+                    });
+            } else {
+                alert('請選擇聲音檔案！');
+            }
+        }
+        function startPolling(jpg_name) {
+            // 每 5 秒輪詢一次
+            var pollingInterval = setInterval(function () {
+                // 發送輪詢請求
+                fetch('/check_upload_status' + '/' + jpg_name, {
+                    method: 'GET'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // 檔案處理成功，停止輪詢
+                            clearInterval(pollingInterval);
+                            document.getElementById('result').innerHTML = '檔案處理成功！';
+                            document.getElementById('imgResult').innerHTML =
+                                '<img src="static/' + jpg_name + '"/>';
+                        } else if (data.status === 'processing') {
+                            // 檔案還在處理中，可以顯示相應的提示
+                            console.log('檔案還在處理中...');
+                        } else {
+                            // 檔案處理失敗，停止輪詢
+                            clearInterval(pollingInterval);
+                            document.getElementById('result').innerHTML = '檔案處理失敗。';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('輪詢錯誤:', error);
+                        // 停止輪詢
+                        clearInterval(pollingInterval);
+                    });
+            }, 5000);  // 5 秒輪詢一次
+        }
+        $.ajax({
+            url: '/check_upload_status',
+            type: 'POST',
+            data: filename.jpg,
+            dataType: '.jpg',
+            success: function (res) {
+                console.log(res)
+                console.log(0)
+
+            },
+            error: function (res) {
+                console.log(res);
+                console.log(1)
+            }
+        })
+    </script>
+</body>
+
+</html>
